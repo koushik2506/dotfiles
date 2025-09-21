@@ -54,6 +54,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-packer'
 Plug 'dense-analysis/ale'
 Plug 'DanBradbury/copilot-chat.vim', {'branch': 'main'}
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 "" Autorun black on save for Python
@@ -73,9 +74,9 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType typescript syn clear foldBraces
 
 "" syntastic check for tsuquyomi
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:tsuquyomi_disable_quickfix = 1
@@ -91,3 +92,14 @@ let g:indentLine_char = '⦙'
 "Ignore settings for NERDTree
 set wildignore+=*.swp,*.lbc
 let NERDTreeRespectWildIgnore=1
+"let g:indentLine_enabled=0
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_text_changed = 'never'
+
+"auto rustfmt
+let g:rustfmt_autosave = 1
+
+"Autocmd to remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
